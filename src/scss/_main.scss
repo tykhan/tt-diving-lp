@@ -1,0 +1,312 @@
+//reset default styles
+* {
+  box-sizing: border-box;
+}
+
+body,
+ul,
+li,
+a,
+h1,
+h2,
+h3,
+h4,
+p,
+input,
+button {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+}
+//mixins
+@mixin buttonStyle {
+  width: 190px;
+  height: 40px;
+  border: none;
+  background-color: $buttonColor;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@mixin buttonStyleHovered {
+  background-color: $buttonColorHovered;
+  box-shadow: 0 0 10px rgba(39, 77, 77, 0.81);
+}
+
+@mixin sectionTitle {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: $headersFontSize;
+  text-align: $rightSidePositioning;
+  align-self: flex-end;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", Ubuntu, Cantarell, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: $normalFontSize;
+}
+
+.header {
+  @include flexColumn;
+  background: url("../img/header_background_v1.jpg") center/cover;
+  height: 100vh;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    width: 230px;
+    height: 150px;
+  }
+
+  &__offer {
+    margin: auto;
+    position: relative;
+    bottom: 100px;
+    text-align: center;
+
+    &__title {
+      color: $headerTextColor;
+      text-transform: uppercase;
+    }
+
+    &__btn {
+      @include buttonStyle;
+      position: relative;
+      top: 30px;
+      transition: background-color $transitionTime, box-shadow $transitionTime;
+      padding: 15px 60px;
+
+      &:hover {
+        @include buttonStyleHovered;
+      }
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+  }
+
+  &__item {
+    position: relative;
+    width: 33%;
+    text-align: center;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      background-color: $headerTextColor;
+      transition: width $transitionTime;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  &__link {
+    color: $headerTextColor;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 15px 70px;
+    font-weight: 500;
+  }
+
+  &::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 1px;
+      background-color: $headerTextColor;
+      left: 0;
+      bottom: -6px;
+      transition: width $transitionTime;
+    }
+
+    &:hover::after {
+      width: 100px;
+    }
+}
+
+
+.main {
+  margin: $spaceBetweenSection auto;
+  width: 1000px;
+  
+  &__toolbar {
+    text-align: $rightSidePositioning;
+  }
+
+  &__search {
+    padding: 5px 10px;
+  }
+}
+
+.blog {
+  @include flexColumn;
+  align-items: center;
+  margin-top: $spaceInsideSection;
+
+}
+
+.post {
+  display: flex;
+  padding: 15px;
+  background-color: $postBgColor;
+  margin-bottom: 30px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__main {
+    @include flexColumn;
+    margin: 10px ;
+  }
+
+  &__details {
+    color: rgb(214, 46, 33);
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      bottom: -10px;
+      left: 0;
+      background-color: rgb(160, 172, 178);
+    }
+  }
+
+  &__title {
+    margin-top: $spaceInsideSection;
+    color: rgb(66, 149 ,165);
+    text-transform: uppercase;
+  }
+
+  &__text {
+    margin-top: 5px;
+  }
+
+  &__btn-more {
+    @include buttonStyle;
+    margin-top: $spaceInsideSection;
+    margin-left: auto;
+    transition: background-color $transitionTime, box-shadow $transitionTime;
+
+    &:hover {
+      @include buttonStyleHovered;
+    }
+  }
+}
+
+.about {
+  margin-top: $spaceBetweenSection;
+
+  &__photo {
+    width: 100%;
+    margin-top: $spaceInsideSection;
+  }
+}
+
+.contact {
+  margin-top: $spaceBetweenSection;
+
+  &__subheader {
+    text-align: $rightSidePositioning;
+    font-weight: 400;
+  }
+}
+
+.form {
+  @include flexColumn;
+
+  &__contacts {
+    display: flex;
+    margin-top: $spaceInsideSection;
+  }
+
+  &__name-block {
+    width: 50%;
+    margin-right: 10px;
+  }
+
+  &__email-block {
+    width: 50%;
+  }
+
+  &__question-block {
+    margin-top: $spaceInsideSection;
+  }
+
+  &__holder {
+    text-align: $rightSidePositioning;
+    margin-bottom: 5px;
+    color: $formHolderColor;
+    font-weight: 300;
+  }
+
+  &__name,
+  &__email,
+  &__message {
+    width: 100%;
+    height: 50px;
+    padding-left: 10px;
+  }
+
+  &__message {
+    resize: none;
+    height: 150px;
+    padding-top: 5px;
+  }
+
+  &__send-btn {
+    @include buttonStyle;
+    margin-top: $spaceInsideSection;
+    align-self: flex-end;
+    transition: background-color $transitionTime, box-shadow $transitionTime;
+
+    &:hover {
+      @include buttonStyleHovered;
+    }
+  }
+}
+
+.title {
+  @include sectionTitle;
+}
+
+.footer {
+  margin-top: $spaceBetweenSection;
+  text-align: center;
+}
